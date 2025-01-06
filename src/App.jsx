@@ -12,16 +12,21 @@ const App = () => {
     address: "hanoi",
     country: "vietnam"
   }
+
+  const addNewTodo = (name) => {
+    alert(`Call me ${name}`)
+  }
   return (
     <div className="todo-container">
       <div className="todo-title">
         Todo List
       </div>
-      <TodoNew />
+      <TodoNew function={addNewTodo} />
       <TodoData
         name={test}
         test_2={test_2}
         data={data}
+
       />
       <div className='todo-images'>
         <img src={reactLogo} className="logo react" />
@@ -29,6 +34,7 @@ const App = () => {
     </div>
   )
 }
+
 
 
 

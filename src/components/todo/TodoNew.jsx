@@ -1,9 +1,10 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-const TodoNew = () => {
+const TodoNew = (props) => {
     return (
         <div className='todo-new'>
             <input type="text" />
-            <button>Add</button>
+            <button onClick={() => { props.function("trinhquanglam") }}>Add</button>
         </div>
     )
 }
