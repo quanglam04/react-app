@@ -2,8 +2,16 @@
 import './style.css'
 
 const SecondComponent = () => {
+    const test = "Trinh Quang Lam "
+    const onject = {
+        name: "Trinh Lam",
+        age: 21
+    }
     return (
         <div>
+            {JSON.stringify(onject)}
+            {test}
+            {console.log(123123)}
             second component
         </div>
 
