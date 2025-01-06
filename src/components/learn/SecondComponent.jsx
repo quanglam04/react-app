@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
-const SecondComponent = () =>{
+import './style.css'
+
+const SecondComponent = () => {
     return (
         <div>
             second component
@@ -10,11 +12,16 @@ const SecondComponent = () =>{
 
 const ThirdComponent = () => {
     return (
-        <div>
-            Third component
-        </div>
+        <>
+            <div className="thirdComponent">
+                Third component
+            </div>
+            <div>
+                Child compoment
+            </div>
+        </>
 
     )
 }
-export {SecondComponent, ThirdComponent}
+export { SecondComponent, ThirdComponent }
 // Khi cần export nhiều Component dùng dấu { }
