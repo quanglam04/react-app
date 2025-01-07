@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { Button, Input } from "antd"
 import { useState } from "react"
+import axios from "axios";
 
 const UserForm = () => {
 
@@ -10,6 +11,14 @@ const UserForm = () => {
     const [phoneNumber, setPhoneNumber] = useState("")
 
     const handleClick = () => {
+        const URL_BACKEND = "http://localhost:8080/api/v1/user"
+        const data = {
+            fullName: fullName,
+            email: email,
+            password: passWord,
+            phone: phoneNumber
+        }
+        axios.post(URL_BACKEND, data)
         console.log(fullName, email, passWord, phoneNumber)
     }
     return (
