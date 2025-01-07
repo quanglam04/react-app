@@ -17,6 +17,13 @@ const App = () => {
     country: "vietnam"
   }
 
+  const deleteItem = (id) => {
+    const updatedList = todoList.filter((value, index) => {
+      return value.id !== id
+    })
+    setTodoList(updatedList)
+  }
+
   const addNewTodo = (name) => {
     const newTodo = {
       id: randomIntFromInterval(1, 100),
@@ -35,12 +42,15 @@ const App = () => {
       <div className="todo-title">
         Todo List
       </div>
-      <TodoNew addNewTodo={addNewTodo} />
+      <TodoNew addNewTodo={addNewTodo}
+
+      />
       {
         todoList.length > 0 ?
           <TodoData
             data={data}
             todoList={todoList}
+            deleteItem={deleteItem}
           />
           :
           todoList.length === 0 &&

@@ -4,7 +4,7 @@
 // Phải để là props để react nhận diện data truyền từ component cha
 const TodoData = (props) => {
     const { todoList } = props
-    console.log(">>>>>>>", todoList)
+    const { deleteItem } = props
     return (
         <div className='todo-data'>
             {
@@ -12,7 +12,7 @@ const TodoData = (props) => {
                     return (
                         <div className="todo-item" key={item.id}>
                             <div>{item.name}</div>
-                            <button>Delete</button>
+                            <button style={{ cursor: "pointer" }} onClick={() => { deleteItem(item.id) }}>Delete</button>
                         </div>
                     )
                 })
