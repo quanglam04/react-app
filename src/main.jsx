@@ -1,4 +1,7 @@
 /* eslint-disable no-unused-vars */
+//g87ZuCAIatLyZIhK
+//trinhquanglam
+//mongodb+srv://trinhquanglam:g87ZuCAIatLyZIhK@cluster0.h6gub.mongodb.net/
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
