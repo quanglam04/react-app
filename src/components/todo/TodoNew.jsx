@@ -1,14 +1,28 @@
+/* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
+
+import { useState } from "react"
+
 /* eslint-disable no-unused-vars */
 const TodoNew = (props) => {
+
+    //useState
+    //setValueInput là 1 hàm
+    const [valueInput, setValueInput] = useState("trinhlam")
+    const handleOnChang = (name) => {
+        setValueInput(name)
+
+    }
     return (
         <div className='todo-new'>
             <input type="text"
-                onChange={(event) => {
-                    console.log(event.target.value)
-                }}
+                onChange={(event) => handleOnChang(event.target.value)}
             />
-            <button style={{ cursor: "pointer" }} onClick={() => { props.function("trinhquanglam") }}>Add</button>
+            <button style={{ cursor: "pointer" }} onClick={() => {
+                props.function("trinhquanglam")
+            }}>Add</button>
+            <div>My text input is: {valueInput}</div>
+
         </div>
     )
 }
