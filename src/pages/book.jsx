@@ -1,6 +1,6 @@
 
 
-const ProductPage = () => {
+const BookPage = () => {
     return (
         <>
 
@@ -9,4 +9,4 @@ const ProductPage = () => {
         </>
     )
 }
-export default ProductPage
+export default BookPage
