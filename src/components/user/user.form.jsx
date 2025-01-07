@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
-import { Button, Input } from "antd"
+import { Button, Input, notification } from "antd"
 import { useState } from "react"
-import axios from "axios";
+import { creatUserAPI } from "../../services/api.service";
+
 
 const UserForm = () => {
 
@@ -10,16 +11,16 @@ const UserForm = () => {
     const [passWord, setPassWord] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
 
-    const handleClick = () => {
-        const URL_BACKEND = "http://localhost:8080/api/v1/user"
-        const data = {
-            fullName: fullName,
-            email: email,
-            password: passWord,
-            phone: phoneNumber
+    const handleClick = async () => {
+        const response = await creatUserAPI(fullName, email, passWord, phoneNumber)
+        console.log("check response", response)
+        if (response.data) {
+            notification.success({
+                message: " create user",
+                description: " Tạo user thành công"
+            })
         }
-        axios.post(URL_BACKEND, data)
-        console.log(fullName, email, passWord, phoneNumber)
+        console.log(">>>>>>>>>>>>: ", response.data)
     }
     return (
         <div className="user-form" style={{ margin: "20px 0" }}>
