@@ -9,6 +9,11 @@ const TodoNew = (props) => {
     //useState
     //setValueInput là 1 hàm
     const [valueInput, setValueInput] = useState("trinhlam")
+    const { addNewTodo } = props
+
+    const handleClick = () => {
+        addNewTodo(valueInput)
+    }
     const handleOnChang = (name) => {
         setValueInput(name)
 
@@ -19,7 +24,7 @@ const TodoNew = (props) => {
                 onChange={(event) => handleOnChang(event.target.value)}
             />
             <button style={{ cursor: "pointer" }} onClick={() => {
-                props.function("trinhquanglam")
+                handleClick()
             }}>Add</button>
             <div>My text input is: {valueInput}</div>
 
