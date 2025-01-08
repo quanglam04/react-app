@@ -11,6 +11,9 @@ import UpdateUserModal from './user.update';
 
 const UserTable = (props) => {
 
+    const [isModalUpdateOpen, setIsModelUpdateOpen] = useState(false);
+    const [dataUpdate, setDataUpdate] = useState("")
+
     const { dataUser } = props
     const columns = [
         {
@@ -36,7 +39,10 @@ const UserTable = (props) => {
             render: (_, record) => (
 
                 <div style={{ display: "flex", gap: "20px" }}>
-                    <EditOutlined style={{ cursor: "pointer", color: "orange" }} />
+                    <EditOutlined onClick={() => {
+                        setDataUpdate(record)
+                        setIsModelUpdateOpen(true)
+                    }} style={{ cursor: "pointer", color: "orange" }} />
                     <DeleteOutlined style={{ cursor: "pointer", color: "red" }} />
                 </div>
 
@@ -53,7 +59,12 @@ const UserTable = (props) => {
                 dataSource={dataUser}
                 rowKey={"_id"}
             />
-            <UpdateUserModal />
+            <UpdateUserModal
+                setDataUpdate={setDataUpdate}
+                dataUpdate={dataUpdate}
+                isModalUpdateOpen={isModalUpdateOpen}
+                setIsModelUpdateOpen={setIsModelUpdateOpen}
+            />
         </>
     )
 

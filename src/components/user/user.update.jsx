@@ -1,23 +1,32 @@
-import { useState } from "react";
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
 import { Input, Modal, notification } from "antd"
 import { creatUserAPI } from "../../services/api.service";
 
-const UpdateUserModal = () => {
-
+const UpdateUserModal = (props) => {
+    const { setDataUpdate, dataUpdate, isModalUpdateOpen, setIsModelUpdateOpen } = props
     const [fullName, setFullName] = useState("");
-    const [email, setEmail] = useState("");
-    const [passWord, setPassWord] = useState("");
+    const [id, setID] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
-    const [isModalOpen, setIsModelOpen] = useState(true);
+
+    // const [isModalUpdateOpen, setIsModelUpdateOpen] = useState(true);
 
     const resetAndCloseModal = () => {
         console.log("123")
         setFullName("");
-        setEmail("");
         setPhoneNumber("");
-        setPassWord("");
-        setIsModelOpen(false);
+        setIsModelUpdateOpen(false);
+        setID("")
+        setDataUpdate(null)
     }
+
+    useEffect(() => {
+        if (dataUpdate) {
+            setID(dataUpdate._id)
+            setFullName(dataUpdate.fullName)
+            setPhoneNumber(dataUpdate.phone)
+        }
+    }, [dataUpdate])
 
 
     const handleSubmitBTN = async () => {
@@ -43,7 +52,7 @@ const UpdateUserModal = () => {
     return (
 
         <Modal title="Update User"
-            open={isModalOpen}
+            open={isModalUpdateOpen}
             onOk={() => handleSubmitBTN()}
             onCancel={() => resetAndCloseModal()}
             maskClosable={false}
@@ -51,19 +60,13 @@ const UpdateUserModal = () => {
         >
             <div style={{ display: "flex", gap: "15px", flexDirection: "column" }}>
                 <div>
+                    <span>ID</span>
+                    <Input value={id} disabled />
+                </div>
+                <div>
                     <span>FullName</span>
                     <Input value={fullName} onChange={(event) => setFullName(event.target.value)}
                     />
-                </div>
-
-                <div>
-                    <span>Email</span>
-                    <Input value={email} onChange={(event) => setEmail(event.target.value)} />
-                </div>
-
-                <div>
-                    <span>Password</span>
-                    <Input.Password value={passWord} onChange={(event) => setPassWord(event.target.value)} />
                 </div>
 
                 <div>
