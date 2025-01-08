@@ -1,17 +1,27 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { Button, Input, Modal, notification } from "antd"
 import { useState } from "react"
 import { creatUserAPI } from "../../services/api.service";
 
 
-const UserForm = () => {
+const UserForm = (props) => {
+    const { loadUser } = props
 
     const [fullName, setFullName] = useState("");
-    const [email, setEmail] = useState("")
-    const [passWord, setPassWord] = useState("")
-    const [phoneNumber, setPhoneNumber] = useState("")
-    const [isModalOpen, setIsModelOpen] = useState(false)
+    const [email, setEmail] = useState("");
+    const [passWord, setPassWord] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [isModalOpen, setIsModelOpen] = useState(false);
 
+    const resetAndCloseModal = () => {
+        console.log("123")
+        setFullName("");
+        setEmail("");
+        setPhoneNumber("");
+        setPassWord("");
+        setIsModelOpen(false);
+    }
 
     const handleSubmitBTN = async () => {
         const response = await creatUserAPI(fullName, email, passWord, phoneNumber)
@@ -22,7 +32,8 @@ const UserForm = () => {
                 description: " Tạo user thành công"
             })
 
-            setIsModelOpen(false)
+            resetAndCloseModal()
+            await loadUser()
         }
         else {
             notification.error({
@@ -31,6 +42,7 @@ const UserForm = () => {
             })
         }
     }
+
 
     return (
         <div className="user-form" style={{ margin: "10px 0" }}>
@@ -46,30 +58,30 @@ const UserForm = () => {
             <Modal title="Craete User"
                 open={isModalOpen}
                 onOk={() => handleSubmitBTN()}
-                onCancel={() => setIsModelOpen(false)}
+                onCancel={() => resetAndCloseModal()}
                 maskClosable={false}
                 okText="CREATE"
             >
                 <div style={{ display: "flex", gap: "15px", flexDirection: "column" }}>
                     <div>
                         <span>FullName</span>
-                        <Input onChange={(event) => setFullName(event.target.value)}
+                        <Input value={fullName} onChange={(event) => setFullName(event.target.value)}
                         />
                     </div>
 
                     <div>
                         <span>Email</span>
-                        <Input onChange={(event) => setEmail(event.target.value)} />
+                        <Input value={email} onChange={(event) => setEmail(event.target.value)} />
                     </div>
 
                     <div>
                         <span>Password</span>
-                        <Input.Password onChange={(event) => setPassWord(event.target.value)} />
+                        <Input.Password value={passWord} onChange={(event) => setPassWord(event.target.value)} />
                     </div>
 
                     <div>
                         <span>PhoneNumber</span>
-                        <Input onChange={(event) => setPhoneNumber(event.target.value)} />
+                        <Input value={phoneNumber} onChange={(event) => setPhoneNumber(event.target.value)} />
                     </div>
 
                 </div>

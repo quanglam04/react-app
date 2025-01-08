@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { Space, Table, Tag } from 'antd';
 import { fetchAllUserAPI } from '../../services/api.service';
@@ -5,14 +6,9 @@ import { useEffect, useState } from 'react';
 
 
 
-const UserTable = () => {
+const UserTable = (props) => {
 
-    const [dataUser, setDataUser] = useState([])
-    //mảng rỗng => chạy 1 lần
-    useEffect(() => {
-        console.log(">>> run useEffect 111")
-        loadUser()
-    }, []);
+    const { dataUser } = props
     const columns = [
         {
             title: 'Id',
@@ -28,11 +24,6 @@ const UserTable = () => {
         }
 
     ];
-
-    const loadUser = async () => {
-        const res = await fetchAllUserAPI()
-        setDataUser(res.data)
-    }
 
 
     return (
