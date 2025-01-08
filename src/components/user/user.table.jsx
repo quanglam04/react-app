@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { ColorFactory } from 'antd/es/color-picker/color';
 import UpdateUserModal from './user.update';
+import ViewUserDetail from './view.user.detail';
 
 
 
@@ -13,6 +14,9 @@ const UserTable = (props) => {
 
     const [isModalUpdateOpen, setIsModelUpdateOpen] = useState(false);
     const [dataUpdate, setDataUpdate] = useState("")
+    const [dataViewDetail, setDataViewDetail] = useState("")
+
+    const [isOpenViewDetail, setIsOpenViewDetail] = useState(false);
 
 
     const { dataUser, loadUser } = props
@@ -22,7 +26,10 @@ const UserTable = (props) => {
             dataIndex: '_id',
             render: (_, record) => {
                 return (
-                    <a href='#'>{record._id}</a>
+                    <a href='#' onClick={() => {
+                        setDataViewDetail(record)
+                        setIsOpenViewDetail(true)
+                    }}>{record._id}</a>
                 )
             }
         },
@@ -66,6 +73,13 @@ const UserTable = (props) => {
                 isModalUpdateOpen={isModalUpdateOpen}
                 setIsModelUpdateOpen={setIsModelUpdateOpen}
                 loadUser={loadUser}
+            />
+
+            <ViewUserDetail
+                dataViewDetail={dataViewDetail}
+                setDataViewDetail={setDataViewDetail}
+                isOpenViewDetail={isOpenViewDetail}
+                setIsOpenViewDetail={setIsOpenViewDetail}
             />
         </>
     )
