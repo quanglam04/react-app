@@ -3,6 +3,9 @@
 import { Space, Table, Tag } from 'antd';
 import { fetchAllUserAPI } from '../../services/api.service';
 import { useEffect, useState } from 'react';
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { ColorFactory } from 'antd/es/color-picker/color';
+import UpdateUserModal from './user.update';
 
 
 
@@ -12,7 +15,12 @@ const UserTable = (props) => {
     const columns = [
         {
             title: 'Id',
-            dataIndex: '_id'
+            dataIndex: '_id',
+            render: (_, record) => {
+                return (
+                    <a href='#'>{record._id}</a>
+                )
+            }
         },
         {
             title: 'Full Name',
@@ -21,17 +29,32 @@ const UserTable = (props) => {
         {
             title: 'Email',
             dataIndex: 'email'
+        },
+        {
+            title: 'Action',
+            key: 'action',
+            render: (_, record) => (
+
+                <div style={{ display: "flex", gap: "20px" }}>
+                    <EditOutlined style={{ cursor: "pointer", color: "orange" }} />
+                    <DeleteOutlined style={{ cursor: "pointer", color: "red" }} />
+                </div>
+
+            )
         }
 
     ];
 
 
     return (
-        <Table
-            columns={columns}
-            dataSource={dataUser}
-            rowKey={"_id"}
-        />
+        <>
+            <Table
+                columns={columns}
+                dataSource={dataUser}
+                rowKey={"_id"}
+            />
+            <UpdateUserModal />
+        </>
     )
 
 }

@@ -4,7 +4,7 @@ const BookPage = () => {
     return (
         <>
 
-            <div>products page</div>
+            <div>Book page</div>
 
         </>
     )
