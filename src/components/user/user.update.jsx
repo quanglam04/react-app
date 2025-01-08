@@ -1,10 +1,11 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { Input, Modal, notification } from "antd"
-import { creatUserAPI } from "../../services/api.service";
+import { creatUserAPI, updateUserAPI } from "../../services/api.service";
 
 const UpdateUserModal = (props) => {
-    const { setDataUpdate, dataUpdate, isModalUpdateOpen, setIsModelUpdateOpen } = props
+    const { setDataUpdate, dataUpdate, isModalUpdateOpen, setIsModelUpdateOpen, loadUser } = props
     const [fullName, setFullName] = useState("");
     const [id, setID] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
@@ -30,20 +31,20 @@ const UpdateUserModal = (props) => {
 
 
     const handleSubmitBTN = async () => {
-        const response = await creatUserAPI(fullName, email, passWord, phoneNumber)
+        const response = await updateUserAPI(id, fullName, phoneNumber)
         console.log("check response", response)
         if (response.data) {
             notification.success({
-                message: " create user",
-                description: " Tạo user thành công"
+                message: " Update user",
+                description: " Cập nhật user thành công"
             })
 
             resetAndCloseModal()
-            // await loadUser()
+            await loadUser()
         }
         else {
             notification.error({
-                message: "Error create user",
+                message: "Error update user",
                 description: JSON.stringify(response.message)
             })
         }

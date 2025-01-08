@@ -14,7 +14,8 @@ const UserTable = (props) => {
     const [isModalUpdateOpen, setIsModelUpdateOpen] = useState(false);
     const [dataUpdate, setDataUpdate] = useState("")
 
-    const { dataUser } = props
+
+    const { dataUser, loadUser } = props
     const columns = [
         {
             title: 'Id',
@@ -64,6 +65,7 @@ const UserTable = (props) => {
                 dataUpdate={dataUpdate}
                 isModalUpdateOpen={isModalUpdateOpen}
                 setIsModelUpdateOpen={setIsModelUpdateOpen}
+                loadUser={loadUser}
             />
         </>
     )
