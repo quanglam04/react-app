@@ -1,12 +1,27 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
+import { ConsoleSqlOutlined } from "@ant-design/icons";
 import { Button, Drawer } from "antd"
 import { useState } from "react";
 
 const ViewUserDetail = (props) => {
     const { setIsOpenViewDetail, isOpenViewDetail, dataViewDetail, setDataViewDetail } = props
+    const [selectedFile, setSelectedFile] = useState(null)
+    const [preview, setPreview] = useState(null)
 
-
+    const handleUploadFile = (event) => {
+        if (!event.target.files || event.target.files.length === 0) {
+            setSelectedFile(null)
+            setPreview(null)
+            return
+        }
+        console.log(event)
+        const file = event.target.files[0]
+        if (file) {
+            setSelectedFile(file)
+            setPreview(URL.createObjectURL(file))
+        }
+    }
     console.log(dataViewDetail)
     return (
         <>
@@ -30,9 +45,14 @@ const ViewUserDetail = (props) => {
                             <br></br>
                             <h3>Avatar:</h3>
                             <br></br>
-                            <div>
+                            <div style={{
+                                marginTop: "10px",
+                                height: "150px",
+                                width: "200px",
+                                border: "1px solid #ccc"
+                            }}>
                                 <img
-                                    height={100} width={150}
+                                    style={{ height: "100%", width: "100%", objectFit: "contain" }}
                                     src={`${import.meta.env.VITE_BACKEND_URL}/images/avatar/${dataViewDetail.avatar}`} />
                             </div>
                             <div>
@@ -43,12 +63,23 @@ const ViewUserDetail = (props) => {
                                         , background: "orange", borderRadius: "5px", cursor: "pointer"
 
                                     }}>Upload File</label>
-                                <input type="file" hidden id="btnUpload"></input>
+                                <input
+                                    onChange={(event) => handleUploadFile(event)}
+                                    type="file" hidden id="btnUpload"></input>
                             </div>
 
-                            {/* <Button type="primary" >Upload File</Button> */}
-
-
+                            {preview &&
+                                <div style={{
+                                    marginTop: "10px",
+                                    height: "150px",
+                                    width: "200px",
+                                    border: "1px solid #ccc"
+                                }}>
+                                    <img
+                                        style={{ height: "100%", width: "100%", objectFit: "contain" }}
+                                        src={preview} />
+                                </div>
+                            }
                         </>
                         : <>
                             <p>Không có dữ liệu</p>
