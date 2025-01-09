@@ -11,7 +11,7 @@ import ViewUserDetail from './view.user.detail';
 
 
 const UserTable = (props) => {
-    const { dataUser, loadUser } = props
+    const { dataUser, loadUser, current, pageSize, total, setCurrent, setPagesize, setTotal } = props
 
     const [isModalUpdateOpen, setIsModelUpdateOpen] = useState(false);
     const [dataUpdate, setDataUpdate] = useState("")
@@ -39,6 +39,9 @@ const UserTable = (props) => {
             })
         }
     };
+    const onChange = (pagination, filters, sorter, extra) => {
+        console.log("check>>>>>>>>>>>>", { pagination, filters, sorter, extra })
+    }
     const cancel = (e) => {
         console.log(e);
         message.error('Click on No');
@@ -114,6 +117,17 @@ const UserTable = (props) => {
                 columns={columns}
                 dataSource={dataUser}
                 rowKey={"_id"}
+                pagination={
+                    {
+                        current: current,
+                        //pageSize = lấy ra bao nhiêu phần tử 1 lần
+                        pageSize: pageSize,
+                        showSizeChanger: true,
+                        total: total,
+                        showTotal: (total, range) => { return (<div> {range[0]}-{range[1]} trên {total} rows</div>) }
+                    }}
+                onChange={onChange}
+
             />
             <UpdateUserModal
                 setDataUpdate={setDataUpdate}
