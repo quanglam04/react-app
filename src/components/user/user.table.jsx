@@ -2,7 +2,7 @@
 import { message, notification, Popconfirm, Space, Table, Tag } from 'antd';
 import { deleteUserAPI, fetchAllUserAPI } from '../../services/api.service';
 import { useEffect, useState } from 'react';
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, TikTokFilled } from '@ant-design/icons';
 import { ColorFactory } from 'antd/es/color-picker/color';
 import UpdateUserModal from './user.update';
 import ViewUserDetail from './view.user.detail';
@@ -46,6 +46,16 @@ const UserTable = (props) => {
 
 
     const columns = [
+        {
+            title: "STT",
+            render: (_, record, index) => {
+                return (
+                    <>
+                        {index + 1}
+                    </>
+                )
+            }
+        },
         {
             title: 'Id',
             dataIndex: '_id',
