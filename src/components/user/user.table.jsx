@@ -119,6 +119,7 @@ const UserTable = (props) => {
                 setDataViewDetail={setDataViewDetail}
                 isOpenViewDetail={isOpenViewDetail}
                 setIsOpenViewDetail={setIsOpenViewDetail}
+                loadUser={loadUser}
             />
         </>
     )
