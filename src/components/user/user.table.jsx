@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
+
 import { message, notification, Popconfirm, Space, Table, Tag } from 'antd';
 import { deleteUserAPI, fetchAllUserAPI } from '../../services/api.service';
 import { useEffect, useState } from 'react';
