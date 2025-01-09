@@ -10,10 +10,11 @@ const UserPage = () => {
     const [pageSize, setPagesize] = useState(5)
     const [total, setTotal] = useState(1)
     //mảng rỗng => chạy 1 lần
+    // mỗi lần data thay đổi nó sẽ chạy cái hàm này
     useEffect(() => {
         console.log(">>> run useEffect 111")
         loadUser()
-    }, []);
+    }, [current, pageSize]);
 
 
     const loadUser = async () => {
