@@ -2,11 +2,13 @@
 import { Link, NavLink } from 'react-router-dom'
 import { Menu } from 'antd'
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { AuthContext } from '../../context/auth.context';
 // import './header.css'
 
 const Header = () => {
     const [current, setCurrent] = useState('mail');
+    const { user } = useContext(AuthContext)
     const onClick = (e) => {
         console.log('click ', e);
         setCurrent(e.key);
