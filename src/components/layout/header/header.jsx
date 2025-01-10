@@ -29,6 +29,21 @@ const Header = () => {
             key: 'book',
             icon: <SettingOutlined />,
         },
+        {
+            label: 'Cài đặt',
+            key: 'setting',
+            icon: <SettingOutlined />,
+            children: [
+                {
+                    label: <Link to={"/login"}>Đăng nhập</Link>,
+                    key: 'login',
+                },
+                {
+                    label: 'Đăng xuất',
+                    key: 'logout',
+                },
+            ]
+        }
 
     ];
     return (
