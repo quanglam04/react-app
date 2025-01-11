@@ -1,14 +1,15 @@
 /* eslint-disable no-unused-vars */
 import { Link, NavLink } from 'react-router-dom'
 import { Menu } from 'antd'
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
-import { useContext, useState } from 'react';
+import { AliwangwangOutlined, AppstoreOutlined, LoginOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
+import { Children, useContext, useState } from 'react';
 import { AuthContext } from '../../context/auth.context';
 // import './header.css'
 
 const Header = () => {
     const [current, setCurrent] = useState('mail');
     const { user } = useContext(AuthContext)
+    console.log(user)
     const onClick = (e) => {
         console.log('click ', e);
         setCurrent(e.key);
@@ -31,21 +32,23 @@ const Header = () => {
             key: 'book',
             icon: <SettingOutlined />,
         },
-        {
-            label: 'Cài đặt',
+        ...(!user.id ? [{
+            label: <Link to={"/login"}>Đăng nhập</Link>,
+            key: 'login',
+            icon: <LoginOutlined />
+        }] : []),
+        ...(user.id ? [{
+            label: `Welcom ${user.fullName}`,
             key: 'setting',
-            icon: <SettingOutlined />,
+            icon: <AliwangwangOutlined />,
             children: [
                 {
-                    label: <Link to={"/login"}>Đăng nhập</Link>,
-                    key: 'login',
-                },
-                {
                     label: 'Đăng xuất',
-                    key: 'logout',
-                },
+                    key: 'logout'
+                }
             ]
         }
+        ] : [])
 
     ];
     return (
