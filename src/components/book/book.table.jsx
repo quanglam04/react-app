@@ -1,8 +1,13 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Space, Table, Tag } from "antd";
+import { useState } from "react";
+import ViewBookDetail from "./view.book.detail";
 
 const BookTable = (props) => {
     const { dataBook, setDataBook, current, setCurrent, pageSize, setPagesize, total, setTotal } = props
+
+    const [dataViewDetail, setDataViewDetail] = useState("")
+    const [isOpenViewDetail, setIsOpenViewDetail] = useState(false);
 
     const columns = [
         {
@@ -17,6 +22,9 @@ const BookTable = (props) => {
             render: (_, record) => {
                 return (
                     <a href='#' onClick={() => {
+                        console.log(">>>RECORD", { record })
+                        setDataViewDetail(record)
+                        setIsOpenViewDetail(true)
                     }}>{record._id}</a>
                 )
             }
@@ -87,6 +95,13 @@ const BookTable = (props) => {
                         showTotal: (total, range) => { return (<div> {range[0]}-{range[1]} trên {total} rows</div>) }
                     }}
                 onChange={onChange}
+            />
+
+            <ViewBookDetail
+                isOpenViewDetail={isOpenViewDetail}
+                setIsOpenViewDetail={setIsOpenViewDetail}
+                dataViewDetail={dataViewDetail}
+                setDataViewDetail={setDataViewDetail}
             />
 
         </>
