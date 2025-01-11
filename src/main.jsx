@@ -33,17 +33,12 @@ const router = createBrowserRouter([
       {
         path: "/users",
         element:
-          <PrivateRoute>
-
-            <UserPage />
-          </PrivateRoute>
+          <UserPage />
       },
       {
         path: "/books",
         element: (
-          <PrivateRoute>
-            <BookPage />
-          </PrivateRoute>
+          <BookPage />
         )
       }
     ]
