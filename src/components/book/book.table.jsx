@@ -12,9 +12,15 @@ const BookTable = (props) => {
     const columns = [
         {
             title: 'STT',
-            dataIndex: 'name',
-            key: 'name',
-            render: (text) => <a>{text}</a>,
+            render: (_, record, index) => {
+                return (
+                    <>
+                        {index + pageSize * (current - 1) + 1}
+
+                    </>
+
+                )
+            }
         },
         {
             title: 'ID',
