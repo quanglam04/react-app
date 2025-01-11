@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import BookTable from "../components/book/book.table"
 import { fetchAllBookAPI } from "../services/api.service"
+import BookForm from "../components/book/book.form"
 
 const BookPage = () => {
     const [dataBook, setDataBook] = useState("")
@@ -24,7 +25,9 @@ const BookPage = () => {
         loadBook()
     }, [current, pageSize]);
     return (
-        <>
+
+        <div style={{ padding: "20px" }}>
+            <BookForm loadBook={loadBook} />
             <BookTable
                 dataBook={dataBook}
                 setDataBook={setDataBook}
@@ -36,7 +39,9 @@ const BookPage = () => {
                 setPagesize={setPagesize}
                 setTotal={setTotal}
             />
-        </>
+
+        </div>
+
     )
 }
 export default BookPage
