@@ -11,7 +11,6 @@ const SecondComponent = () => {
         <div>
             {JSON.stringify(onject)}
             {test}
-            {console.log(123123)}
             second component
         </div>
 

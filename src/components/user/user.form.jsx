@@ -15,7 +15,6 @@ const UserForm = (props) => {
     const [isModalOpen, setIsModelOpen] = useState(false);
 
     const resetAndCloseModal = () => {
-        console.log("123")
         setFullName("");
         setEmail("");
         setPhoneNumber("");
@@ -25,7 +24,6 @@ const UserForm = (props) => {
 
     const handleSubmitBTN = async () => {
         const response = await creatUserAPI(fullName, email, passWord, phoneNumber)
-        console.log("check response", response)
         if (response.data) {
             notification.success({
                 message: " create user",

@@ -16,7 +16,6 @@ const ViewUserDetail = (props) => {
             setPreview(null)
             return
         }
-        console.log(event)
         const file = event.target.files[0]
         if (file) {
             setSelectedFile(file)
@@ -28,8 +27,6 @@ const ViewUserDetail = (props) => {
         const resUpload = await handleUploadFile(selectedFile, "avatar")
         if (resUpload.data) {
             const newAvatar = resUpload.data.fileUploaded
-            console.log("check newAvatar", newAvatar)
-            console.log("dataViewDetail", dataViewDetail)
             const resUpdateAvatar = await updateUserAvatarAPI(newAvatar, dataViewDetail._id, dataViewDetail.fullName, dataViewDetail.phone)
             if (resUpdateAvatar.data) {
                 setIsOpenViewDetail(false)
@@ -65,7 +62,6 @@ const ViewUserDetail = (props) => {
         }
         //step 2: update user
     }
-    console.log(dataViewDetail)
     return (
         <>
 

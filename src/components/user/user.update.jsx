@@ -13,7 +13,6 @@ const UpdateUserModal = (props) => {
     // const [isModalUpdateOpen, setIsModelUpdateOpen] = useState(true);
 
     const resetAndCloseModal = () => {
-        console.log("123")
         setFullName("");
         setPhoneNumber("");
         setIsModelUpdateOpen(false);
@@ -32,7 +31,6 @@ const UpdateUserModal = (props) => {
 
     const handleSubmitBTN = async () => {
         const response = await updateUserAPI(id, fullName, phoneNumber)
-        console.log("check response", response)
         if (response.data) {
             notification.success({
                 message: " Update user",

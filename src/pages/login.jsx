@@ -18,9 +18,7 @@ const LoginPage = () => {
         if (res.data) {
             message.success("Đăng nhập thành công")
             localStorage.setItem("access_token", res.data.access_token)
-            console.log(res.data)
             setUser(res.data.user)
-            console.log(user)
             navigate("/")
         }
         else {
@@ -63,7 +61,10 @@ const LoginPage = () => {
                                 },
                             ]}
                         >
-                            <Input />
+                            <Input onKeyDown={(event) => {
+                                if (event.key === 'Enter')
+                                    form.submit()
+                            }} />
                         </Form.Item>
                         <Form.Item
                             label="Password"
@@ -75,7 +76,10 @@ const LoginPage = () => {
                                 },
                             ]}
                         >
-                            <Input.Password />
+                            <Input.Password onKeyDown={(event) => {
+                                if (event.key === 'Enter')
+                                    form.submit()
+                            }} />
                         </Form.Item>
                         <Form.Item >
                             <div style={{

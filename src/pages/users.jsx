@@ -12,14 +12,12 @@ const UserPage = () => {
     //mảng rỗng => chạy 1 lần
     // mỗi lần data thay đổi nó sẽ chạy cái hàm này
     useEffect(() => {
-        console.log(">>> run useEffect 111")
         loadUser()
     }, [current, pageSize]);
 
 
     const loadUser = async () => {
         const res = await fetchAllUserAPI(current, pageSize)
-        console.log(res)
         if (res.data) {
             setDataUser(res.data.result)
             setCurrent(res.data.meta.current)

@@ -22,7 +22,6 @@ const UserTable = (props) => {
 
     const handleConfirm = async (id) => {
         const response = await deleteUserAPI(id);
-        console.log(response, ">>>>>>>>>>>>>>")
         if (response.statusCode !== 400) {
             notification.success({
                 message: " Xóa user",
@@ -53,10 +52,8 @@ const UserTable = (props) => {
                 setPagesize(+pagination.pageSize)
             }
         }
-        console.log("check>>>>>>>>>>>>", { pagination, filters, sorter, extra })
     }
     const cancel = (e) => {
-        console.log(e);
         message.error('Click on No');
     };
 
