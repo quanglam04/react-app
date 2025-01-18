@@ -16,6 +16,7 @@ const BookForm = (props) => {
     const handleSubmitBTN = async () => {
         //0. check xem người dùng có ảnh lên không
         //1. Gọi API upload ảnh
+        //2. Gọi API tạo sách
         //3. Gọi API load lại danh sách
         //4. Gọi hàm resetAndCloseModal
         if (!preview) {
@@ -28,8 +29,6 @@ const BookForm = (props) => {
             const resUpload = await handleUploadFile(thumbnail, "book");
             if (resUpload.data) {
                 const avatar = resUpload.data.fileUploaded
-                console.log({ thumbnail })
-                console.log({ resUpload })
                 // const resCreate = await createBookAPI(thumbnail.name, mainText, author, price, quantity, category)
                 const resCreate = await createBookAPI(avatar, mainText, author, price, quantity, category)
                 if (resCreate) {
@@ -80,7 +79,8 @@ const BookForm = (props) => {
         }
         const file = event.target.files[0]
         if (file) {
-            console.log(">>>>>>", { event })
+            console.log("BookForm", { event })
+            console.log("????????????????????????????????????", URL.createObjectURL(file))
             setSelectedFile(file)
             setPreview(URL.createObjectURL(file))
         }
@@ -98,7 +98,7 @@ const BookForm = (props) => {
             </div>
 
 
-            <Modal title="Craete Book"
+            <Modal title="Create Book"
                 open={isModalOpen}
                 onOk={() => handleSubmitBTN()}
                 onCancel={() => resetAndCloseModal()}
@@ -189,11 +189,6 @@ const BookForm = (props) => {
                             onChange={(event) => handleUploadImage(event)}
                             type="file" hidden id="btnUpload"></input>
                     </div>
-
-
-
-
-
                 </div>
             </Modal>
 

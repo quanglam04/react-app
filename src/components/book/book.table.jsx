@@ -2,12 +2,16 @@ import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Space, Table, Tag } from "antd";
 import { useState } from "react";
 import ViewBookDetail from "./view.book.detail";
+import BookUpdateModal from "./book.update";
 
 const BookTable = (props) => {
-    const { dataBook, setDataBook, current, setCurrent, pageSize, setPagesize, total, setTotal } = props
+    const { dataBook, setDataBook, current, setCurrent, pageSize, setPagesize, total, setTotal, loadBook } = props
 
     const [dataViewDetail, setDataViewDetail] = useState("")
     const [isOpenViewDetail, setIsOpenViewDetail] = useState(false);
+
+    const [isModalUpdateOpen, setIsModelUpdateOpen] = useState(false)
+    const [dataUpdate, setDataUpdate] = useState("")
 
     const columns = [
         {
@@ -59,10 +63,15 @@ const BookTable = (props) => {
             title: 'Action',
             key: 'action',
             render: (_, record) => (
-                <div style={{ gap: "20px" }}>
+                <div style={{ gap: "20px", display: "flex" }}>
+                    <EditOutlined style={{ cursor: "pointer", color: "orange" }}
+                        onClick={() => {
+                            setIsModelUpdateOpen(true)
+                            setDataUpdate(record)
+                        }}
+                    />
                     <DeleteOutlined
                         style={{ cursor: "pointer", color: "red" }} />
-                    <EditOutlined style={{ cursor: "pointer", color: "orange" }} />
                 </div>
             ),
         }
@@ -101,6 +110,14 @@ const BookTable = (props) => {
                         showTotal: (total, range) => { return (<div> {range[0]}-{range[1]} trên {total} rows</div>) }
                     }}
                 onChange={onChange}
+            />
+            <BookUpdateModal
+                isModalUpdateOpen={isModalUpdateOpen}
+                setIsModelUpdateOpen={setIsModelUpdateOpen}
+                dataUpdate={dataUpdate}
+                setDataUpdate={setDataUpdate}
+                loadBook={loadBook}
+
             />
 
             <ViewBookDetail
