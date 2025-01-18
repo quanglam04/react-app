@@ -79,8 +79,6 @@ const BookForm = (props) => {
         }
         const file = event.target.files[0]
         if (file) {
-            console.log("BookForm", { event })
-            console.log("????????????????????????????????????", URL.createObjectURL(file))
             setSelectedFile(file)
             setPreview(URL.createObjectURL(file))
         }

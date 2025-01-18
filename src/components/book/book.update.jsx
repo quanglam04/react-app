@@ -87,7 +87,6 @@ const BookUpdateModal = (props) => {
         }
         const file = event.target.files[0]
         if (file) {
-            console.log("BookUpdateModal", { event })
             setSelectedFile(file)
             setPreview(URL.createObjectURL(file))
             setIsChange(true)
