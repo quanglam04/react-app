@@ -1,8 +1,9 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Space, Table, Tag } from "antd";
+import { notification, Popconfirm, Space, Table, Tag } from "antd";
 import { useState } from "react";
 import ViewBookDetail from "./view.book.detail";
 import BookUpdateModal from "./book.update";
+import { deleteBookAPI } from "../../services/api.service";
 
 const BookTable = (props) => {
     const { dataBook, setDataBook, current, setCurrent, pageSize, setPagesize, total, setTotal, loadBook } = props
@@ -12,6 +13,22 @@ const BookTable = (props) => {
 
     const [isModalUpdateOpen, setIsModelUpdateOpen] = useState(false)
     const [dataUpdate, setDataUpdate] = useState("")
+    const handleConfirm = async (id) => {
+        const resPonse = await deleteBookAPI(id)
+        if (resPonse.data) {
+            notification.success({
+                description: "Xóa sách",
+                message: "Xóa thành công"
+            })
+            await loadBook()
+        }
+        else {
+            notification.error({
+                description: "Xóa sách",
+                message: "Xóa thất bại"
+            })
+        }
+    }
 
     const columns = [
         {
@@ -70,8 +87,20 @@ const BookTable = (props) => {
                             setDataUpdate(record)
                         }}
                     />
-                    <DeleteOutlined
-                        style={{ cursor: "pointer", color: "red" }} />
+
+                    <Popconfirm
+                        title="Xóa sách"
+                        description="Bạn có chắc chắn muốn xóa sách không"
+                        onConfirm={() => handleConfirm(record._id)}
+                        onCancel
+                        okText="Yes"
+                        cancelText="No"
+                        placement="leftTop"
+                    >
+                        <DeleteOutlined
+                            style={{ cursor: "pointer", color: "red" }} />
+                    </Popconfirm>
+
                 </div>
             ),
         }
